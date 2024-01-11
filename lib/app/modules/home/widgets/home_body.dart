@@ -63,23 +63,23 @@ class HomeBody extends GetView<HomeController> {
             color: Colors.black,
           ),
           SizedBox(height: 20),
-          if(UserAccount.info?.isCompany==false)
-          Text(
-            "    Jobs suitable for your interests",
-            style: AppStyles.headLine3.copyWith(
-              color: Get.theme.colorScheme.onBackground,
+          if (UserAccount.info?.isCompany == false)
+            Text(
+              "    Jobs suitable for your interests",
+              style: AppStyles.headLine3.copyWith(
+                color: Get.theme.colorScheme.onBackground,
+              ),
+              textAlign: TextAlign.start,
             ),
-            textAlign: TextAlign.start,
-          ),
-          if(UserAccount.info?.isCompany==true)
-          Text(
-            "    Similar companies.",
-            style: AppStyles.headLine3.copyWith(
-              color: Get.theme.colorScheme.onBackground,
+          if (UserAccount.info?.isCompany == true)
+            Text(
+              "    Similar companies.",
+              style: AppStyles.headLine3.copyWith(
+                color: Get.theme.colorScheme.onBackground,
+              ),
+              textAlign: TextAlign.start,
             ),
-            textAlign: TextAlign.start,
-          ),
-         
+
           // Use ListView.builder to display multiple CardViews
           Obx(
             () => ListView.builder(
@@ -88,7 +88,7 @@ class HomeBody extends GetView<HomeController> {
               itemCount: controller.allJobs.length,
               itemBuilder: (context, index) {
                 CreateJobAcount job = controller.allJobs[index];
-UserAccount user=UserAccount.info!;
+                UserAccount user = UserAccount.info!;
                 return FutureBuilder<CompanyModel>(
                   future: controller.getcompany(job.companyId),
                   builder: (context, snapshot) {
@@ -98,7 +98,8 @@ UserAccount user=UserAccount.info!;
                       if (company != null) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: MyCardView(job: job, company: company,users:user),
+                          child: MyCardView(
+                              job: job, company: company, users: user),
                         );
                       } else {
                         // Handle the case where user is null

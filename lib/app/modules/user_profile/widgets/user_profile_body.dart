@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lavoro/app/core/utils/helpers/system_helper.dart';
@@ -13,8 +15,7 @@ import '../controllers/user_profile_controller.dart';
 import 'custom_header_widget.dart';
 
 class UserProfileBody extends StatelessWidget {
-  final UserProfileController _userProfileController =
-      Get.put(UserProfileController());
+  final UserProfileController _userProfileController = Get.find();
 
   final CompanyModel? company;
   final bool isnotuser;
@@ -29,7 +30,7 @@ class UserProfileBody extends StatelessWidget {
   Widget build(BuildContext context) {
     _userProfileController.refreshPage();
 
-    final user = UserAccount.info;
+    final user = UserAccount.info!;
     if (user == null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Get.snackbar(
@@ -47,7 +48,7 @@ class UserProfileBody extends StatelessWidget {
     }
 
     List<String> selectedLanguages = user.selectedLanguage;
-
+    print(user.username);
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
@@ -55,22 +56,22 @@ class UserProfileBody extends StatelessWidget {
             isnotuser: isnotuser,
             useraccount: company,
           ),
-          const SizedBox(height: 20),
+          // const SizedBox(height: 20)
 
           CustomProfileListTile(
-            label: isnotuser ? company!.username : user.email,
+            label: user.username,
             icons: Icons.text_fields,
             showCopyButton: false,
           ),
           const SizedBox(height: 20),
           CustomProfileListTile(
-            label: isnotuser ? company!.email : user.email,
+            label: user.email,
             icons: Icons.email,
             showCopyButton: true,
           ),
           const SizedBox(height: 20),
           CustomProfileListTile(
-            label: isnotuser ? company!.phoneNumber : user.phoneNumber,
+            label: user.phoneNumber,
             icons: Icons.phone,
             onTap: () => SystemHelper.makeCall(user.phoneNumber),
           ),
@@ -83,19 +84,19 @@ class UserProfileBody extends StatelessWidget {
             ),
           const SizedBox(height: 20),
           CustomProfileListTile(
-            label: isnotuser ? company!.country : user.country,
+            label: user.country,
             icons: Icons.location_city,
             showCopyButton: false,
           ),
           const SizedBox(height: 20),
           CustomProfileListTile(
-            label: isnotuser ? company!.descrption : user.descrption,
+            label: user.descrption,
             icons: Icons.description,
             showCopyButton: false,
           ),
           const SizedBox(height: 20),
           CustomProfileListTile(
-            label: isnotuser ? company!.selectedjobs : user.selectedjobs,
+            label: user.selectedjobs,
             icons: Icons.work,
             showCopyButton: false,
           ),
@@ -138,6 +139,8 @@ class UserProfileBody extends StatelessWidget {
                   await Get.toNamed(Routes.EDIT_INFO);
                   // This code executes after the user navigates back from the editing page
                   // You can add logic here to refresh the user profile page
+
+                  _userProfileController.update();
                   // Call the refresh function after returning from the editing page
                 },
               ),

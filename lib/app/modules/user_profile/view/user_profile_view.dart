@@ -28,12 +28,14 @@ class UserProfileView extends StatelessWidget {
               fontSize: 26),
         ),
         centerTitle: true,
-        automaticallyImplyLeading: true,
+        automaticallyImplyLeading: false,
       ),
-      body: UserProfileBody(company: null,),
+      body: UserProfileBody(
+        company: null,
+      ),
       bottomNavigationBar: BottomNavBar(
         selectedIndex: 2, // Adjust the selectedIndex for UserProfileView
-        onTabChange: ( index) {
+        onTabChange: (index) {
           switch (index) {
             case 0:
               Get.toNamed('/home'); // Navigate to HomeView

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 //import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
+import 'package:lavoro/app/data/repositorys/auth_repository.dart';
+import 'package:lavoro/app/global_widgets/custom_button.dart';
 
 import '../core/theme/app_theme.dart';
 import '../data/model/user_model.dart';
@@ -22,7 +24,6 @@ class CustomDrawer extends StatelessWidget {
       child: Column(
         children: [
           UserAccountsDrawerHeader(
-            
             currentAccountPicture: UserImageWidget(
               size: Get.height * .08,
               margin: EdgeInsets.zero,
@@ -36,7 +37,6 @@ class CustomDrawer extends StatelessWidget {
             ),
             accountEmail: Text(
               UserAccount.info?.phoneNumber ?? "+9627xxxxxxxx",
-              
               style: TextStyle(
                 color: Get.theme.colorScheme.background,
               ),
@@ -50,19 +50,27 @@ class CustomDrawer extends StatelessWidget {
                 _DrawerItem(
                   title: "Settings",
                   icons: Icons.settings,
-               
                   onTap: () {
-                   Get.toNamed(Routes.SETTINGS);
+                    Get.toNamed(Routes.SETTINGS);
                   },
                 ),
-                _DrawerItemss(title: "M O O D", icons: Icons.dark_mode,
-                isThemeSwitchItem: true,),
-                 _DrawerItem(
+                _DrawerItemss(
+                  title: "M O O D",
+                  icons: Icons.dark_mode,
+                  isThemeSwitchItem: true,
+                ),
+                _DrawerItem(
                   title: "Contact Us",
                   icons: Icons.info,
-                  
                   onTap: () {
-                     Get.toNamed(Routes.INFO_PAGE);
+                    Get.toNamed(Routes.INFO_PAGE);
+                  },
+                ),
+                _DrawerItemss(
+                  title: "log Out",
+                  icons: Icons.logout_rounded,
+                  onTap: () {
+                    logOut();
                   },
                 ),
               ],
@@ -123,7 +131,8 @@ class _DrawerItem extends StatelessWidget {
     );
   }
 }
- class _DrawerItemss extends StatelessWidget {
+
+class _DrawerItemss extends StatelessWidget {
   final String title;
   final String? subTitle;
   final IconData icons;
@@ -133,50 +142,77 @@ class _DrawerItem extends StatelessWidget {
   final Function()? onTap;
 
   final Color? iconColor;
-  const _DrawerItemss({  
-       this.isThemeSwitchItem = false,
-     required this.title,
-   required this.icons,
-
+  const _DrawerItemss({
+    this.isThemeSwitchItem = false,
+    required this.title,
+    required this.icons,
     this.enabled = true,
     this.subTitle,
-   this.viewNamed,
+    this.viewNamed,
     this.onTap,
-    
-   this.iconColor,
+    this.iconColor,
   });
 
-  @override Widget build(BuildContext context) {
-   return Tooltip(
-     message: enabled ? "" : "Coming soon",
-    child: ListTile(      leading: Icon(
-
-         icons,    
-             color: iconColor,
- ),
-     enabled: enabled,
-    title: Text(
-        title,
-       maxLines: 1,
-        overflow: TextOverflow.ellipsis,         style: const TextStyle(
-          fontSize: 16,
-       ),
-  ),
-      subtitle: subTitle != null ? Text(subTitle!) : null,
-        
-   onTap: () {
-     if (isThemeSwitchItem) {
-       // Function to change the mood (theme)
-        Get.changeTheme(Get.isDarkMode ? AppTheme.light : AppTheme.dark);      } else {
-          
-                          Get.back();
-        }
-      // Close the drawer after performing action
-      
-         
-        
- }
- ),
-   );
+  @override
+  Widget build(BuildContext context) {
+    return Tooltip(
+      message: enabled ? "" : "Coming soon",
+      child: ListTile(
+          leading: Icon(
+            icons,
+            color: iconColor,
+          ),
+          enabled: enabled,
+          title: Text(
+            title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              fontSize: 16,
+            ),
+          ),
+          subtitle: subTitle != null ? Text(subTitle!) : null,
+          onTap: () {
+            if (isThemeSwitchItem) {
+              // Function to change the mood (theme)
+              Get.changeTheme(Get.isDarkMode ? AppTheme.light : AppTheme.dark);
+            } else {
+              Get.back();
+            }
+            // Close the drawer after performing action
+          }),
+    );
   }
- }
+}
+
+void logOut() async {
+  await Get.defaultDialog(
+    backgroundColor: Colors.red,
+    title: "SignOut",
+    content: const Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SizedBox(height: 25),
+        Text(
+          "You're leaving\nAre you sure?",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 18,
+          ),
+        ),
+        SizedBox(height: 25),
+      ],
+    ),
+    confirm: CustomButton(
+      backgroundColor: Colors.red,
+      label: "Log Out",
+      onPressed: () async {
+        await AuthRepository.signOut();
+      },
+    ),
+    cancel: CustomButton(
+      label: "Cancel",
+      onPressed: () => Get.back(),
+    ),
+  );
+}

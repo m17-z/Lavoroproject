@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lavoro/app/data/model/companyModel.dart';
+import 'package:lavoro/app/data/model/emp_model.dart';
 import 'package:lavoro/app/data/model/user_model.dart';
 
 import '../model/job_model.dart';
@@ -45,14 +46,16 @@ class CreateJobRepositry extends GetxController {
           .toList();
     });
   }
-    Stream<List<UserAccount>> getNonCompanyUsersStream() {
-  return _firestore.collection("users").snapshots().map((snapshot) {
-    return snapshot.docs
-        .where((doc) => !(doc.data()['isCompany'] ?? false))
-        .map((doc) => UserAccount.formJson(doc.data()))
-        .toList();
-  });
-}
+
+  Stream<List<UserModel>> getNonCompanyUsersStream() {
+    return _firestore.collection("users").snapshots().map((snapshot) {
+      return snapshot.docs
+          .where((doc) => !(doc.data()['isCompany'] ?? false))
+          .map((doc) => UserModel.fromJson(
+              doc.data())) // Use UserModel instead of UserAccount
+          .toList();
+    });
+  }
 
   Future<CompanyModel> getCompany(String uuid) async {
     try {

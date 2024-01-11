@@ -17,7 +17,7 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-  padding: EdgeInsets.only(left: 2,bottom: 1,right: 1,top: 2),
+      padding: const EdgeInsets.only(left: 2, bottom: 1, right: 1, top: 2),
       color: Colors.purple,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 12),
@@ -34,7 +34,7 @@ class BottomNavBar extends StatelessWidget {
           onTabChange: onTabChange,
           tabs: [
             const GButton(
-               icon: Icons.cabin,
+              icon: Icons.cabin,
               text: "Companys",
             ),
             const GButton(

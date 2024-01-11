@@ -1,16 +1,17 @@
 // ignore_for_file: non_constant_identifier_names, avoid_print, use_rethrow_when_possible
 
 import 'package:get/get.dart';
+import 'package:lavoro/app/data/model/emp_model.dart';
 
-import 'package:lavoro/app/data/model/user_model.dart';
+import 'package:lavoro/app/data/model/user_model.dart'; // Import UserModel instead of UserAccount
 
 import 'package:lavoro/app/data/repositorys/create_repository.dart';
 
 class EmpHomeController extends GetxController {
   int get bottomNavIndex => _bottomNavIndex;
   int _bottomNavIndex = 3;
-  RxList<UserAccount> allusers = <UserAccount>[].obs;
-  
+  RxList<UserModel> allusers = <UserModel>[].obs; // Change type to UserModel
+
   void changeIndex(int index) {
     _bottomNavIndex = index;
     update();
@@ -19,8 +20,7 @@ class EmpHomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // Replace getAllJobs with getAllJobsStream
-   getNonCompanyUsersStream();
+    getNonCompanyUsersStream();
   }
 
   final JobRepo = Get.put(CreateJobRepositry());
@@ -31,5 +31,4 @@ class EmpHomeController extends GetxController {
       update();
     });
   }
-
 }

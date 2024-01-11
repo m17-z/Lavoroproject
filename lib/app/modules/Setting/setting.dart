@@ -1,12 +1,13 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lavoro/app/core/theme/app_theme.dart';
 
 import '../../data/repositorys/auth_repository.dart';
 import '../../global_widgets/custom_button.dart';
-
 
 class MyApp extends StatelessWidget {
   @override
@@ -22,43 +23,40 @@ class MyApp extends StatelessWidget {
 class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
-  
     return Scaffold(
-      
       appBar: AppBar(
-         backgroundColor: Color(0xFF929EAA),
+        backgroundColor: Color(0xFF929EAA),
         title: Text('Settings'),
       ),
       backgroundColor: Color(0xFF929EAA),
       body: Padding(
         padding: EdgeInsets.all(Get.width * .1),
         child: Column(
-          
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-          
             Image.asset('assets/logo/setting.gif'),
-            SizedBox(height: 24,),
+            SizedBox(
+              height: 24,
+            ),
             CustomButton(
               label: 'Edit Email',
+              icons: Icons.edit,
               backgroundColor: Colors.purple,
               onPressed: () => showSnackbar('Edit Email'),
             ),
-           
-           
             SizedBox(height: 20),
             CustomButton(
               label: 'About Us',
-              backgroundColor: Colors.purple,
+              icons: Icons.info,
               onPressed: () => showAboutUsDialog(context),
             ),
             SizedBox(height: 20),
             CustomButton(
-              label: 'Log Out',
+              label: 'Delete Account',
+              icons: Icons.delete,
               backgroundColor: Colors.red, // Choose your preferred color
-              onPressed: () => logOut(),
-            ),
+              onPressed: () => delete(),
+            )
           ],
         ),
       ),
@@ -137,15 +135,15 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  void logOut() async {
+  void delete() async {
     await Get.defaultDialog(
-      title: "SignOut",
+      title: "Delete account",
       content: const Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(height: 25),
           Text(
-            "You're leaving\nAre you sure?",
+            "You're Deleting\n your account are you sure?",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 18,
@@ -156,13 +154,40 @@ class SettingsPage extends StatelessWidget {
       ),
       confirm: CustomButton(
         backgroundColor: Colors.red,
-        label: "Log Out",
-        onPressed: () => AuthRepository.signOut(),
+        label: "Delete Account",
+        onPressed: () async {
+          await deleteAccountAndLogout();
+          // Perform additional actions if needed after account deletion
+        },
       ),
       cancel: CustomButton(
         label: "Cancel",
         onPressed: () => Get.back(),
       ),
     );
+  }
+
+  Future<void> deleteAccountAndLogout() async {
+    try {
+      // Get the current user
+      User? user = FirebaseAuth.instance.currentUser;
+
+      if (user != null) {
+        // Delete user from Firestore collection
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user.uid)
+            .delete();
+
+        // Delete user from Firebase Authentication
+        await user.delete();
+
+        // Show dialog to confirm logout
+        AuthRepository.signOut();
+      }
+    } catch (error) {
+      print("Error deleting account: $error");
+      // Handle error as needed
+    }
   }
 }

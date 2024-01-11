@@ -13,16 +13,16 @@ import '../widgets/home_body.dart';
 import 'Job_view.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({super.key,});
+  const HomeView({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const CustomDrawer(),
       appBar: const HomeAppBar(),
-      body:  const HomeBody(),
-       
-          
+      body: const HomeBody(),
       bottomNavigationBar: BottomNavBar(
         selectedIndex: 0,
         onTabChange: (index) {
