@@ -8,7 +8,7 @@ import '../../../data/provider/user_firebase.dart';
 import '../../../routes/app_pages.dart';
 
 class SigninController extends GetxController {
-  RxBool isLoading = false.obs; // استخدام RxBool لحالة التحميل
+  RxBool isLoading = true.obs; // استخدام RxBool لحالة التحميل
   late TextEditingController emailController;
   late TextEditingController passwordController;
   FirebaseAuth auth = FirebaseAuth.instance;

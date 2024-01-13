@@ -25,7 +25,7 @@ class CustomTextFormField extends StatefulWidget {
   final EdgeInsetsGeometry? padding;
   final bool withLabel;
   final TextStyle? style;
-  
+  final TextButton? textButton;
   const CustomTextFormField(
       {super.key,
       this.controller,
@@ -42,6 +42,7 @@ class CustomTextFormField extends StatefulWidget {
       this.onChanged,
       this.onTap,
       this.prefix,
+       this.textButton,
       this.prefixIcon,
       this.required = false,
       this.padding,

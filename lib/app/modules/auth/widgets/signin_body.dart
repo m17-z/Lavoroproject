@@ -15,31 +15,32 @@ import '../controllers/signin_controller.dart';
 
 import '../forget_page/for.dart';
 
-
 class SigninBody extends GetView<SigninController> {
   const SigninBody({Key? key}) : super(key: key);
 
   bool get isLoading => false;
 
   @override
-  
   Widget build(BuildContext context) {
-       Get.put(SigninController());
+    Get.put(SigninController());
 
     if (kDebugMode) {
       print(UserAccount.info);
     }
-    double headerHeight = 300;
+
     return Scaffold(
-      backgroundColor: Get.theme.colorScheme.background,
-      body: LoadingWidget(
-        isLoading: isLoading,
-        child: ListView(
-          padding: EdgeInsets.zero,
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              height: headerHeight,
-              child: HeaderWidget(headerHeight, true, Icons.laptop, true),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.asset(
+                "assets/logo/Login.gif",
+                height: 350,
+              ),
             ),
             SafeArea(
               child: Container(
@@ -49,15 +50,14 @@ class SigninBody extends GetView<SigninController> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: Get.height * .05),
                     Text(
-                      "        Sign in to your account",
+                      "    Sign in to your account",
                       textAlign: TextAlign.center,
                       style: AppStyles.headLine1.copyWith(
                         color: Get.theme.colorScheme.onBackground,
                       ),
                     ),
-                    SizedBox(height: Get.height * .05),
+                    SizedBox(height: Get.height * .02),
                     CustomTextFormField(
                       controller: controller.emailController,
                       prefixIcon: const Icon(Icons.email),
@@ -81,7 +81,8 @@ class SigninBody extends GetView<SigninController> {
                     const SizedBox(height: 13),
                     GestureDetector(
                       onTap: () {
-                        Get.to(() => const Forget());
+                        Get.to(() => const Forget(),
+                            transition: Transition.rightToLeftWithFade);
                       },
                       child: const Text(
                         "   Forgot Your Password ?",
@@ -109,6 +110,7 @@ class SigninBody extends GetView<SigninController> {
                             controller.emailController.text,
                             controller.passwordController.text,
                           );
+                          kThemeAnimationDuration;
                         },
                         child: Text(
                           "Sign In",

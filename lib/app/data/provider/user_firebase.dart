@@ -113,5 +113,19 @@ class DatabaseFirestore extends GetxController {
       return null;
     }
   }
+    static FirebaseFirestore firebaseInstance = FirebaseFirestore.instance;
+
+  static Future<void> updateIsVerify(bool isEmailVerified) async {
+    try {
+      await firebaseInstance
+          .collection("users")
+          .doc(userInfo?.uid)
+          .update({'isEmailVerified': isEmailVerified});
+    } catch (e) {
+      if (kDebugMode) {
+        print("errrrror ${e.toString()}");
+      }
+    }
+  }
 
 }

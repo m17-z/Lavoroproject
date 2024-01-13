@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'box_emp.dart';
 
-
 class EmpCategoriesRow extends StatelessWidget {
   const EmpCategoriesRow({super.key});
 
@@ -13,7 +12,7 @@ class EmpCategoriesRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         langBox(
-          imagePath: 'assets/images/jobs/web.jpg',
+          imagePath: 'assets/images/jobs/web.png',
           name: 'Web Developer',
           onPressed: () {
             handleCategorySelection();
@@ -26,36 +25,36 @@ class EmpCategoriesRow extends StatelessWidget {
             handleCategorySelection();
           },
         ),
-       langBox(
-          imagePath: 'assets/images/jobs/soft.jpg',
+        langBox(
+          imagePath: 'assets/images/jobs/soft.png',
           name: 'Software Engineer',
           onPressed: () {
             handleCategorySelection();
           },
         ),
-       langBox(
-          imagePath: 'assets/images/jobs/data.jpg',
+        langBox(
+          imagePath: 'assets/images/jobs/data.png',
           name: 'Data Scientist',
           onPressed: () {
             handleCategorySelection();
           },
         ),
-       langBox(
+        langBox(
           imagePath: 'assets/images/jobs/net.png',
           name: 'Network Engineer',
           onPressed: () {
             handleCategorySelection();
           },
         ),
-       langBox(
-          imagePath: 'assets/images/jobs/cyper.jpg',
+        langBox(
+          imagePath: 'assets/images/jobs/cyper.png',
           name: 'Cybersecurity Analyst',
           onPressed: () {
             handleCategorySelection();
           },
         ),
         langBox(
-          imagePath: 'assets/images/jobs/system.jpg',
+          imagePath: 'assets/images/jobs/system.png',
           name: 'System Administrator',
           onPressed: () {
             handleCategorySelection();
@@ -69,21 +68,20 @@ class EmpCategoriesRow extends StatelessWidget {
           },
         ),
         langBox(
-          imagePath: 'assets/images/jobs/ai.jpg',
+          imagePath: 'assets/images/jobs/ai.png',
           name: 'AI Developer',
-          
           onPressed: () {
             handleCategorySelection();
           },
         ),
         langBox(
-          imagePath: 'assets/images/jobs/dev.jpg',
+          imagePath: 'assets/images/jobs/dev.png',
           name: 'DevOps Engineer',
           onPressed: () {
             handleCategorySelection();
           },
         ),
-       langBox(
+        langBox(
           imagePath: 'assets/images/jobs/game.png',
           name: 'Game Developer',
           onPressed: () {

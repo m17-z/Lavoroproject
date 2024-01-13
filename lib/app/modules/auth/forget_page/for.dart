@@ -8,8 +8,6 @@ import 'package:get/get.dart';
 import 'package:lavoro/app/global_widgets/custom_button.dart';
 import 'package:lavoro/app/global_widgets/custom_textformfield.dart';
 
-import '../../../global_widgets/headar_widget.dart';
-import '../../../global_widgets/loading_widget.dart';
 import '../../../global_widgets/text_theme.dart';
 
 class Forget extends StatefulWidget {
@@ -45,7 +43,7 @@ class _ForgetState extends State<Forget> {
             actions: [
               TextButton(
                 onPressed: () {
-                  Get.toNamed('/signin'); 
+                  Get.toNamed('/signin');
                 },
                 child: const Text('OK'),
               ),
@@ -81,17 +79,19 @@ class _ForgetState extends State<Forget> {
 
   @override
   Widget build(BuildContext context) {
-    double headerHeight = 300;
     return Scaffold(
-      backgroundColor: Get.theme.colorScheme.background,
-      body: LoadingWidget(
-        isLoading: isLoading,
-        child: ListView(
-          padding: EdgeInsets.zero,
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              height: headerHeight,
-              child: HeaderWidget(headerHeight, true, Icons.lock, false),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.network(
+                "https://img.freepik.com/free-vector/forgot-password-concept-illustration_114360-1123.jpg?size=626&ext=jpg&ga=GA1.1.26700806.1705031120&semt=ais",
+                height: 350,
+              ),
             ),
             SafeArea(
               child: Container(

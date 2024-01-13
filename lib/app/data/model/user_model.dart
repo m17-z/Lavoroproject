@@ -162,4 +162,16 @@ class UserAccount extends GetxController {
       rethrow; // Rethrow the exception to handle it in the calling code
     }
   }
+  Future<void> updateIsVerify(bool? isEmailVerified) async {
+    if (isEmailVerified != null) {
+      try {
+        printInfo(info: isEmailVerified.toString());
+
+        DatabaseFirestore.updateIsVerify(isEmailVerified);
+        isEmailVerified = isEmailVerified;
+      } catch (e) {
+        printError(info: e.toString());
+      }
+    }
+  }
 }

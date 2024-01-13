@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first, unused_import, must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lavoro/app/data/model/companyModel.dart';
@@ -8,8 +7,9 @@ import '../../home/widgets/buttom_bar.dart';
 import '../widgets/user_profile_body.dart';
 
 class UserProfileView extends StatelessWidget {
-  CompanyModel? company;
-  bool isnotuser;
+  final CompanyModel? company;
+  final bool isnotuser;
+
   UserProfileView({
     Key? key,
     this.company,
@@ -23,16 +23,15 @@ class UserProfileView extends StatelessWidget {
         title: const Text(
           'User profile',
           style: TextStyle(
-              fontStyle: FontStyle.italic,
-              fontWeight: FontWeight.w900,
-              fontSize: 26),
+            fontStyle: FontStyle.italic,
+            fontWeight: FontWeight.w900,
+            fontSize: 26,
+          ),
         ),
         centerTitle: true,
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
       ),
-      body: UserProfileBody(
-        company: null,
-      ),
+      body: UserProfileBody(company: company), // Pass the 'company' parameter
       bottomNavigationBar: BottomNavBar(
         selectedIndex: 2, // Adjust the selectedIndex for UserProfileView
         onTabChange: (index) {

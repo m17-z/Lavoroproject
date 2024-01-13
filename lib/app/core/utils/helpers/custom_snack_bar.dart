@@ -3,20 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 abstract class CustomSnackBar {
+  static String message = '';
+
   static void defaultSnackBar({
     String? title,
     required String message,
     ContentType? contentType,
   }) {
-      final snackBar = SnackBar(
-    
+    final snackBar = SnackBar(
       elevation: 0,
       behavior: SnackBarBehavior.floating,
       backgroundColor: Colors.transparent,
-      
       content: AwesomeSnackbarContent(
         title: title ?? '',
-        message:message,
+        message: message,
         contentType: contentType ?? ContentType.help,
       ),
     );
@@ -58,5 +58,4 @@ abstract class CustomSnackBar {
       contentType: ContentType.success,
     );
   }
-
 }

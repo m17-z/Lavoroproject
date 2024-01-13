@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 import '../../../routes/app_pages.dart';
 
 class SignupController extends GetxController {
@@ -26,7 +25,6 @@ class SignupController extends GetxController {
     Get.toNamed(Routes.RegisterCompany);
     employee = false;
   }
-
 
   void goToSignInView() => Get.offNamed(Routes.SIGNIN);
 }

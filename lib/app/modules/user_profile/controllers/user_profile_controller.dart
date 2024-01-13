@@ -5,20 +5,18 @@ import 'package:get/get.dart';
 import 'package:lavoro/app/data/model/user_model.dart';
 
 class UserProfileController extends GetxController {
-
-     final currentUser = UserAccount.info!;
-   final formKey = GlobalKey<FormState>();
-   RxBool isLoading = false.obs;
+  final currentUser = UserAccount.info!;
+  final formKey = GlobalKey<FormState>();
+  RxBool isLoading = false.obs;
   late TextEditingController username;
   late TextEditingController description;
   late TextEditingController phoneNumber;
   final RxBool isExpanded = false.obs;
   String uuid = UserAccount.info!.uid;
   late String experience;
-   late RxList<String> selectedJobs = <String>[].obs;
-   late RxString selectedExperience = "select experience".obs;
+  late RxList<String> selectedJobs = <String>[].obs;
+  late RxString selectedExperience = "select experience".obs;
   List<String> experiences = [
-   
     "Trainer ",
     "0-Experince ",
     "1-5 years",
@@ -26,7 +24,6 @@ class UserProfileController extends GetxController {
     "10-15",
     "15 OR more",
   ];
-
 
   RxList<String> selectedLanguages = <String>[].obs;
   final List<String> jobs = [
@@ -41,18 +38,142 @@ class UserProfileController extends GetxController {
     'AI Developer',
     'DevOps Engineer',
   ];
-final Map<String, List<String>> languages = {
-    'Web Developer': ['HTML', 'JavaScript', 'PHP', 'Python', 'Ruby', 'Java', 'C#'],
-    'Mobile App Developer': ['Swift', 'Kotlin', 'React-Native', 'Flutter','Java'],
-    'Software Engineer': ['Python', 'Java', 'C++', 'C#', 'JavaScript'],
-    'Data Scientist': ['Pandas', 'NumPy', 'Scikit-Learn', 'R', 'SQL', 'Scala'],
-    'Network Engineer': ['Cisco-IOS', 'Python', 'PowerShell'],
-    'Cybersecurity Analyst': ['Python', 'C++', 'Java', 'PowerShell', 'Bash-Scripting'],
-    'Database Administrator': ['SQL', 'Oracle', 'MySQL', 'MongoDB'],
-    'System Administrator': ['Linux-Shell-Scripting', 'PowerShell', 'Python','Unix-Shell-Scripting'],
-    'AI Developer': ['TensorFlow', 'PyTorch', 'R', 'Java'],
-    'DevOps Engineer': ['Linux-Shell-Scripting','Unix-Shell-Scripting', 'Ansible', 'Docker', 'Kubernetes'],
-    'Game Developer': ['C++', 'C#', 'Unity', 'Unreal Engine', 'JavaScript', 'Python'],
+  final Map<String, List<String>> languages = {
+    'Web Developer': [
+      'HTML',
+      'JavaScript',
+      'PHP',
+      'Python',
+      'Ruby',
+      'Java',
+      'C#',
+      'TypeScript',
+      'Angular'
+    ],
+    'Mobile App Developer': [
+      'Swift',
+      'Kotlin',
+      'React-Native',
+      'Flutter',
+      'Java',
+      'Objective-C',
+      'Xamarin',
+      'PhoneGap',
+      'Ionic'
+    ],
+    'Software Engineer': [
+      'Python',
+      'Java',
+      'C++',
+      'C#',
+      'JavaScript',
+      'Ruby',
+      'Swift',
+      'Kotlin',
+      'GO',
+      'PHP'
+    ],
+    'Data Scientist': [
+      'Pandas',
+      'NumPy',
+      'Scikit-Learn',
+      'R',
+      'SQL',
+      'Scala',
+      'Julia',
+      'Python',
+      'Haskell',
+      'MATLAB'
+    ],
+    'Network Engineer': [
+      'Cisco-IOS',
+      'Python',
+      'PowerShell',
+      'TCL',
+      'GO',
+      'YAML',
+      'Ansible',
+      'JavaScript',
+      'Bash-Scripting'
+    ],
+    'Cybersecurity Analyst': [
+      'Python',
+      'C++',
+      'Java',
+      'PowerShell',
+      'Bash-Scripting',
+      'Ruby',
+      'GO',
+      'C',
+      'SQL',
+      'JavaScript'
+    ],
+    'Database Administrator': [
+      'SQL',
+      'Oracle',
+      'MySQL',
+      'MongoDB',
+      'Python',
+      'T-SQL',
+      'Java',
+      'Ruby'
+    ],
+    'System Administrator': [
+      'Linux-Shell-Scripting',
+      'PowerShell',
+      'Python',
+      'Unix-Shell-Scripting',
+      'Bash-Scripting',
+      'Ruby',
+      'Perl',
+      'GO',
+      'SQL',
+      'Java'
+    ],
+    'AI Developer': [
+      'TensorFlow',
+      'PyTorch',
+      'R',
+      'Java',
+      'Python',
+      'C++',
+      'JavaScript',
+      'R',
+      'Lisp',
+      'Prolog',
+      'MATLAB',
+      'Swift'
+    ],
+    'DevOps Engineer': [
+      'Linux-Shell-Scripting',
+      'Unix-Shell-Scripting',
+      'Ansible',
+      'Docker',
+      'Kubernetes',
+      'Bash-Scripting',
+      'Python',
+      'Ruby',
+      'JavaScript',
+      'GO',
+      'PowerShell',
+      'YAML',
+      'JSON',
+      'SQL',
+      'Java'
+    ],
+    'Game Developer': [
+      'C++',
+      'C#',
+      'Unity',
+      'Unreal Engine',
+      'JavaScript',
+      'Python',
+      'Java',
+      'Swift',
+      'Lua',
+      'Haskell',
+      'GML'
+    ],
   };
   RxMap<String, bool> isSelected = <String, bool>{}.obs;
   RxList<String> selectedlang = <String>[].obs;
@@ -64,6 +185,7 @@ final Map<String, List<String>> languages = {
       selectedLanguages.add(language);
     }
   }
+
   void retainSelectedLanguages(Map<String, bool> isSelected) {
     selectedLanguages.retainWhere(
       (language) => isSelected[language] ?? false,
@@ -79,15 +201,15 @@ final Map<String, List<String>> languages = {
     selectedLanguages.addAll(languages[job]!);
   }
 
-   void refreshPage() {
+  void refreshPage() {
     update(); // Use GetX's update() function to trigger UI refresh
   }
-  
+
   void onInit() {
     username = TextEditingController();
     description = TextEditingController();
     phoneNumber = TextEditingController();
-  
+
     selectedLanguages = <String>[].obs;
     experience = experiences[0];
     // user = Get.arguments['user'];
@@ -100,12 +222,12 @@ final Map<String, List<String>> languages = {
     required String newPhoneNumber,
     required String newJobDescription,
     required List<String> newProgrammingLanguages,
- 
     required String newExperience,
   }) async {
     try {
       final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-      final DocumentReference userRef = _firestore.collection('users').doc(uuid);
+      final DocumentReference userRef =
+          _firestore.collection('users').doc(uuid);
 
       await _firestore.runTransaction((transaction) async {
         final DocumentSnapshot snapshot = await transaction.get(userRef);
@@ -116,7 +238,6 @@ final Map<String, List<String>> languages = {
             'jobDescription': newJobDescription,
             'phoneNumber': newPhoneNumber,
             'Programing Language': newProgrammingLanguages,
-         
             'selectedjobs': newSelectedJobs,
             'experience': newExperience,
           });

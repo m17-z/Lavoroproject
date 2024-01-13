@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../core/utils/helpers/system_helper.dart';
 import '../../../global_widgets/custom_button.dart';
-import '../../../global_widgets/logo_widget.dart';
+
 import '../../../global_widgets/text_theme.dart';
 import '../controllers/Type.dart';
 
@@ -12,42 +11,39 @@ class SignupBody extends GetView<SignupController> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => SystemHelper.closeKeyboard(),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
-        width: Get.width,
-        height: Get.height,
-        child: Form(
-          key: controller.formKey,
-          child: ListView(
-            children: [
-              SizedBox(height: Get.height * .05),
-              LogoWidget(
-                height: Get.height * .2,
-                width: Get.height * .2,
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.asset(
+                "assets/logo/type.gif",
+                height: 350,
               ),
-              SizedBox(height: Get.height * .10),
-              Text(
-                "Sign up to your account",
-                textAlign: TextAlign.center,
-                style: AppStyles.headLine1.copyWith(
-                  color: Get.theme.colorScheme.onBackground,
-                ),
+            ),
+            Text(
+              "Create account",
+              textAlign: TextAlign.center,
+              style: AppStyles.headLine1.copyWith(
+                color: Get.theme.colorScheme.onBackground,
               ),
-              SizedBox(height: Get.height * .033),
-              CustomButton(
-                label: "Company",
-                onPressed: controller.onSignupComapny,
-              ),
-              SizedBox(height: Get.height * .02),
-              CustomButton(
-                label: "Employee",
-                onPressed: controller.onSignupEmployee,
-              ),
-              SizedBox(height: Get.height * .02),
-            ],
-          ),
+            ),
+            SizedBox(height: Get.height * .033),
+            CustomButton(
+              label: "Company",
+              onPressed: controller.onSignupComapny,
+            ),
+            SizedBox(height: Get.height * .02),
+            CustomButton(
+              label: "Employee",
+              onPressed: controller.onSignupEmployee,
+            ),
+            SizedBox(height: Get.height * .02),
+          ],
         ),
       ),
     );

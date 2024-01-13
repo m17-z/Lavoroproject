@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:lavoro/app/modules/Setting/setting.dart';
 
 import 'package:lavoro/app/modules/auth/bindings/register_banding_company.dart';
+import 'package:lavoro/app/modules/auth/otp/send_otp.dart';
 
 import 'package:lavoro/app/modules/home/views/Job_view.dart';
 import 'package:lavoro/app/modules/jobs/view/all_jobs_view.dart';
@@ -12,6 +13,8 @@ import 'package:lavoro/app/modules/user_profile/widgets/edit_information.dart';
 import '../modules/auth/bindings/register_binding_employe.dart';
 import '../modules/auth/bindings/signin_binding.dart';
 import '../modules/auth/bindings/signup_binding.dart';
+import '../modules/auth/controllers/email_var_controller.dart';
+import '../modules/auth/views/email_var_view.dart';
 import '../modules/auth/views/register_view_Company.dart';
 import '../modules/auth/views/register_view_Employee.dart';
 import '../modules/auth/views/signin_view.dart';
@@ -33,7 +36,6 @@ import '../modules/splash/views/splash_view.dart';
 import '../modules/user_profile/bindings/user_profile_binding.dart';
 import '../modules/user_profile/view/edit_info.dart';
 import '../modules/user_profile/view/user_profile_view.dart';
-
 
 // ignore_for_file: constant_identifier_names
 
@@ -66,7 +68,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.EDIT_INFO,
-      page: () =>  EditProfileInformation(),
+      page: () => EditProfileInformation(),
       // binding: SplashBinding(),
     ),
     GetPage(
@@ -110,6 +112,10 @@ class AppPages {
       binding: SearchBinding(),
       transition: Transition.fadeIn,
     ),
+    // GetPage(
+    //   name: _Paths.Varify,
+    //   page: () => const VarifyView(),
+    // ),
     GetPage(
       name: _Paths.USER_PROFILE,
       page: () => UserProfileView(
@@ -124,13 +130,16 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ALLJOBS,
-      page: () =>  AllJobsView(),
+      page: () => AllJobsView(),
       binding: JobBinding(),
     ),
-     GetPage(
+    GetPage(
       name: _Paths.SETTINGS,
-      page: () =>  SettingsPage(),
-     
+      page: () => SettingsPage(),
+    ),
+    GetPage(
+      name: _Paths.OTP,
+      page: () => SendOTPView(),
     ),
   ];
 }

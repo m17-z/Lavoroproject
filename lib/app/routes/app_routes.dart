@@ -6,8 +6,8 @@ part of 'app_pages.dart';
 abstract class Routes {
   Routes._();
   static const HOME = _Paths.HOME;
-   static const Ai = _Paths.Ai;
-    static const EmpHome = _Paths.EMPHOME;
+  static const Ai = _Paths.Ai;
+  static const EmpHome = _Paths.EMPHOME;
   static const SPLASH = _Paths.SPLASH;
   static const SIGNIN = _Paths.SIGNIN;
   static const SIGNUP = _Paths.SIGNUP;
@@ -25,15 +25,15 @@ abstract class Routes {
   static const ALLJOBS = _Paths.ALLJOBS;
   static const INFO_PAGE = _Paths.INFO_PAGE;
   static const SETTINGS = _Paths.SETTINGS;
-    static const EDIT_INFO = _Paths.EDIT_INFO;
-
-  
+  static const EDIT_INFO = _Paths.EDIT_INFO;
+  static const Varify = _Paths.Varify;
+  static const OTP = _Paths.OTP;
 }
 
 abstract class _Paths {
   _Paths._();
   static const HOME = '/home';
-   static const SETTINGS = '/setting';
+  static const SETTINGS = '/setting';
   static const SPLASH = '/splash';
   static const INFO_PAGE = '/info';
   static const SIGNIN = '/signin';
@@ -49,9 +49,10 @@ abstract class _Paths {
   static const SEARCH = '/search';
   static const USER_PROFILE = '/user-profile';
   static const JOB = '/JOB';
-   static const EMPHOME = '/emp_home';
-  static const Ai= '/Ai';
+  static const EMPHOME = '/emp_home';
+  static const Ai = '/Ai';
   static const EDIT_INFO = '/edit_info';
-static const ALLJOBS = '/JOBS';
- 
+  static const ALLJOBS = '/JOBS';
+  static const Varify = '/email_var';
+   static const OTP = '/send_otp';
 }

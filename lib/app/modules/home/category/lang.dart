@@ -12,7 +12,7 @@ class CategoriesRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         CategoryBox(
-          imagePath: 'assets/images/jobs/web.jpg',
+          imagePath: 'assets/images/jobs/web.png',
           name: 'Web Developer',
           onPressed: () {
             handleCategorySelection();
@@ -26,14 +26,14 @@ class CategoriesRow extends StatelessWidget {
           },
         ),
         CategoryBox(
-          imagePath: 'assets/images/jobs/soft.jpg',
+          imagePath: 'assets/images/jobs/soft.png',
           name: 'Software Engineer',
           onPressed: () {
             handleCategorySelection();
           },
         ),
         CategoryBox(
-          imagePath: 'assets/images/jobs/data.jpg',
+          imagePath: 'assets/images/jobs/data.png',
           name: 'Data Scientist',
           onPressed: () {
             handleCategorySelection();
@@ -47,14 +47,14 @@ class CategoriesRow extends StatelessWidget {
           },
         ),
         CategoryBox(
-          imagePath: 'assets/images/jobs/cyper.jpg',
+          imagePath: 'assets/images/jobs/cyper.png',
           name: 'Cybersecurity Analyst',
           onPressed: () {
             handleCategorySelection();
           },
         ),
         CategoryBox(
-          imagePath: 'assets/images/jobs/system.jpg',
+          imagePath: 'assets/images/jobs/system.png',
           name: 'System Administrator',
           onPressed: () {
             handleCategorySelection();
@@ -68,7 +68,7 @@ class CategoriesRow extends StatelessWidget {
           },
         ),
         CategoryBox(
-          imagePath: 'assets/images/jobs/ai.jpg',
+          imagePath: 'assets/images/jobs/ai.png',
           name: 'AI Developer',
           
           onPressed: () {
@@ -76,7 +76,7 @@ class CategoriesRow extends StatelessWidget {
           },
         ),
         CategoryBox(
-          imagePath: 'assets/images/jobs/dev.jpg',
+          imagePath: 'assets/images/jobs/dev.png',
           name: 'DevOps Engineer',
           onPressed: () {
             handleCategorySelection();

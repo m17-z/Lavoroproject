@@ -1,17 +1,13 @@
-// ignore_for_file: unused_element, deprecated_member_use, prefer_const_constructors
-
 import 'package:flutter/material.dart';
-//import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
-import 'package:lavoro/app/data/repositorys/auth_repository.dart';
-import 'package:lavoro/app/global_widgets/custom_button.dart';
+import 'package:lavoro/app/core/theme/app_theme.dart';
 
-import '../core/theme/app_theme.dart';
 import '../data/model/user_model.dart';
-//import '../data/repositorys/auth_repository.dart';
+import '../data/repositorys/auth_repository.dart';
 import '../routes/app_pages.dart';
-//import 'custom_button.dart';
+import 'custom_button.dart';
 import 'user_image_widget.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -20,9 +16,8 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      width: Get.width * .7,
-      child: Column(
-        children: [
+        width: Get.width * .7,
+        child: Column(children: [
           UserAccountsDrawerHeader(
             currentAccountPicture: UserImageWidget(
               size: Get.height * .08,
@@ -41,6 +36,41 @@ class CustomDrawer extends StatelessWidget {
                 color: Get.theme.colorScheme.background,
               ),
             ),
+            otherAccountsPictures: [
+              IconButton(
+                onPressed: () async {
+                  await Get.defaultDialog(
+                    title: "SignOut",
+                    content: const Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SizedBox(height: 25),
+                        Text(
+                          "You're leaving\nAre you sure?",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                        SizedBox(height: 25),
+                      ],
+                    ),
+                    confirm: CustomButton(
+                      backgroundColor: Colors.red,
+                      label: "Log Out",
+                      onPressed: () => AuthRepository.signOut(),
+                    ),
+                    cancel: CustomButton(
+                      label: "Cancel",
+                      onPressed: () => Get.back(),
+                    ),
+                  );
+                },
+                tooltip: "SignOut",
+                icon: const Icon(FontAwesomeIcons.rightFromBracket),
+                color: Get.theme.colorScheme.background,
+              )
+            ],
           ),
           Expanded(
             child: ListView(
@@ -66,19 +96,10 @@ class CustomDrawer extends StatelessWidget {
                     Get.toNamed(Routes.INFO_PAGE);
                   },
                 ),
-                _DrawerItemss(
-                  title: "log Out",
-                  icons: Icons.logout_rounded,
-                  onTap: () {
-                    logOut();
-                  },
-                ),
               ],
             ),
-          ),
-        ],
-      ),
-    );
+          )
+        ]));
   }
 }
 
@@ -183,36 +204,4 @@ class _DrawerItemss extends StatelessWidget {
           }),
     );
   }
-}
-
-void logOut() async {
-  await Get.defaultDialog(
-    backgroundColor: Colors.red,
-    title: "SignOut",
-    content: const Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        SizedBox(height: 25),
-        Text(
-          "You're leaving\nAre you sure?",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 18,
-          ),
-        ),
-        SizedBox(height: 25),
-      ],
-    ),
-    confirm: CustomButton(
-      backgroundColor: Colors.red,
-      label: "Log Out",
-      onPressed: () async {
-        await AuthRepository.signOut();
-      },
-    ),
-    cancel: CustomButton(
-      label: "Cancel",
-      onPressed: () => Get.back(),
-    ),
-  );
 }

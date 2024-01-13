@@ -30,10 +30,9 @@ class RegisterControllerCompany extends GetxController {
   late TextEditingController cphoneController;
   late TextEditingController cpasswordController;
   late TextEditingController cconfirmPasswordController;
-   late RxList<String> selectedJobs = <String>[].obs;
-   late RxString selectedExperience = "select experience".obs;
+  late RxList<String> selectedJobs = <String>[].obs;
+  late RxString selectedExperience = "select experience".obs;
   List<String> experiences = [
-   
     "Trainer ",
     "0-Experince ",
     "1-5 years",
@@ -69,18 +68,142 @@ class RegisterControllerCompany extends GetxController {
     'AI Developer',
     'DevOps Engineer',
   ];
-final Map<String, List<String>> languages = {
-    'Web Developer': ['HTML', 'JavaScript', 'PHP', 'Python', 'Ruby', 'Java', 'C#'],
-    'Mobile App Developer': ['Swift', 'Kotlin', 'React-Native', 'Flutter','Java'],
-    'Software Engineer': ['Python', 'Java', 'C++', 'C#', 'JavaScript'],
-    'Data Scientist': ['Pandas', 'NumPy', 'Scikit-Learn', 'R', 'SQL', 'Scala'],
-    'Network Engineer': ['Cisco-IOS', 'Python', 'PowerShell'],
-    'Cybersecurity Analyst': ['Python', 'C++', 'Java', 'PowerShell', 'Bash-Scripting'],
-    'Database Administrator': ['SQL', 'Oracle', 'MySQL', 'MongoDB'],
-    'System Administrator': ['Linux-Shell-Scripting', 'PowerShell', 'Python','Unix-Shell-Scripting'],
-    'AI Developer': ['TensorFlow', 'PyTorch', 'R', 'Java'],
-    'DevOps Engineer': ['Linux-Shell-Scripting','Unix-Shell-Scripting', 'Ansible', 'Docker', 'Kubernetes'],
-    'Game Developer': ['C++', 'C#', 'Unity', 'Unreal Engine', 'JavaScript', 'Python'],
+  final Map<String, List<String>> languages = {
+    'Web Developer': [
+      'HTML',
+      'JavaScript',
+      'PHP',
+      'Python',
+      'Ruby',
+      'Java',
+      'C#',
+      'TypeScript',
+      'Angular'
+    ],
+    'Mobile App Developer': [
+      'Swift',
+      'Kotlin',
+      'React-Native',
+      'Flutter',
+      'Java',
+      'Objective-C',
+      'Xamarin',
+      'PhoneGap',
+      'Ionic'
+    ],
+    'Software Engineer': [
+      'Python',
+      'Java',
+      'C++',
+      'C#',
+      'JavaScript',
+      'Ruby',
+      'Swift',
+      'Kotlin',
+      'GO',
+      'PHP'
+    ],
+    'Data Scientist': [
+      'Pandas',
+      'NumPy',
+      'Scikit-Learn',
+      'R',
+      'SQL',
+      'Scala',
+      'Julia',
+      'Python',
+      'Haskell',
+      'MATLAB'
+    ],
+    'Network Engineer': [
+      'Cisco-IOS',
+      'Python',
+      'PowerShell',
+      'TCL',
+      'GO',
+      'YAML',
+      'Ansible',
+      'JavaScript',
+      'Bash-Scripting'
+    ],
+    'Cybersecurity Analyst': [
+      'Python',
+      'C++',
+      'Java',
+      'PowerShell',
+      'Bash-Scripting',
+      'Ruby',
+      'GO',
+      'C',
+      'SQL',
+      'JavaScript'
+    ],
+    'Database Administrator': [
+      'SQL',
+      'Oracle',
+      'MySQL',
+      'MongoDB',
+      'Python',
+      'T-SQL',
+      'Java',
+      'Ruby'
+    ],
+    'System Administrator': [
+      'Linux-Shell-Scripting',
+      'PowerShell',
+      'Python',
+      'Unix-Shell-Scripting',
+      'Bash-Scripting',
+      'Ruby',
+      'Perl',
+      'GO',
+      'SQL',
+      'Java'
+    ],
+    'AI Developer': [
+      'TensorFlow',
+      'PyTorch',
+      'R',
+      'Java',
+      'Python',
+      'C++',
+      'JavaScript',
+      'R',
+      'Lisp',
+      'Prolog',
+      'MATLAB',
+      'Swift'
+    ],
+    'DevOps Engineer': [
+      'Linux-Shell-Scripting',
+      'Unix-Shell-Scripting',
+      'Ansible',
+      'Docker',
+      'Kubernetes',
+      'Bash-Scripting',
+      'Python',
+      'Ruby',
+      'JavaScript',
+      'GO',
+      'PowerShell',
+      'YAML',
+      'JSON',
+      'SQL',
+      'Java'
+    ],
+    'Game Developer': [
+      'C++',
+      'C#',
+      'Unity',
+      'Unreal Engine',
+      'JavaScript',
+      'Python',
+      'Java',
+      'Swift',
+      'Lua',
+      'Haskell',
+      'GML'
+    ],
   };
   RxMap<String, bool> isSelected = <String, bool>{}.obs;
   RxList<String> selectedlang = <String>[].obs;
@@ -92,6 +215,7 @@ final Map<String, List<String>> languages = {
       selectedLanguages.add(language);
     }
   }
+
   void retainSelectedLanguages(Map<String, bool> isSelected) {
     selectedLanguages.retainWhere(
       (language) => isSelected[language] ?? false,
@@ -117,7 +241,7 @@ final Map<String, List<String>> languages = {
     CompanyNameController = TextEditingController();
     jobDescriptionController = TextEditingController();
     cphoneController = TextEditingController();
-     country = countries[0];
+    country = countries[0];
     selectedLanguages = <String>[].obs;
     experience = experiences[0];
     super.onInit();
@@ -178,10 +302,10 @@ final Map<String, List<String>> languages = {
           phoneNumber: cphoneController.text,
           descrption: jobDescriptionController.text,
           email: cemailController.text,
-         country: selectedCity.value,
-        selectedjobs: selectedJob.value,
+          country: selectedCity.value,
+          selectedjobs: selectedJob.value,
           selectedLanguage: selectedLanguages,
-           experience: selectedExperience.value,
+          experience: selectedExperience.value,
           // creationTime: currentTime,
           isCompany: true);
 
