@@ -272,7 +272,9 @@ class RegisterBodyCompany extends GetView<RegisterControllerCompany> {
     if (controller.formKey.currentState!.validate() ||
         (controller.selectedLanguages.isNotEmpty &&
             controller.selectedJobs.isNotEmpty &&
-            controller.selectedCity.isNotEmpty||controller.imagePath == null || controller.imagePath!.isEmpty)) {
+            controller.selectedCity.isNotEmpty
+            ||controller.imagePath == null || 
+            controller.imagePath!.isEmpty)) {
       // All required fields are filled
       showDialog(
         context: context,

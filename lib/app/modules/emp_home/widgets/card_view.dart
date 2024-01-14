@@ -41,10 +41,8 @@ class _EmpCardView extends State<EmpCardView> {
     List<String> list2 = widget.currentUser.selectedLanguage;
 
     bool languagesMatch = list1.any((language) => list2.contains(language));
-    bool jobsMatch =
-        widget.users.selectedJobs.contains(widget.currentUser.selectedjobs);
-    bool usermatch =
-        widget.users.email.contains(widget.currentUser.email) == false;
+    bool jobsMatch =widget.users.selectedJobs.contains(widget.currentUser.selectedjobs);
+    bool usermatch =widget.users.email.contains(widget.currentUser.email) == false;
     setState(() {
       // Set isDataAvailable to true if either condition is met
       isDataAvailable = (usermatch && (languagesMatch || jobsMatch));

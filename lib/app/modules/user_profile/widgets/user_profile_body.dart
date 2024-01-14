@@ -51,133 +51,118 @@ class UserProfileBody extends StatelessWidget {
     List<String> selectedLanguages = user.selectedLanguage;
     print(user.username);
     return SingleChildScrollView(
-      child: Column(
-        children: <Widget>[
-          CustomHeaderWidget(
-            isnotuser: isnotuser,
-            useraccount: company,
-          ),
-          // const SizedBox(height: 20)
+        child: Column(children: <Widget>[
+      CustomHeaderWidget(
+        isnotuser: isnotuser,
+        useraccount: company,
+      ),
+      // const SizedBox(height: 20)
 
-          CustomProfileListTile(
-            label: user.username,
-            icons: Icons.text_fields,
-            showCopyButton: false,
-          ),
-          const SizedBox(height: 20),
-          CustomProfileListTile(
-            label: user.email,
-            icons: Icons.email,
-            showCopyButton: true,
-          ),
-          const SizedBox(height: 20),
-          CustomProfileListTile(
-            label: user.phoneNumber,
-            icons: Icons.phone,
-            onTap: () => SystemHelper.makeCall(user.phoneNumber),
-          ),
-          if (user.isCompany == false) const SizedBox(height: 20),
-          if (user.isCompany == false)
-            CustomProfileListTile(
-              label: user.experience,
-              icons: Icons.timer,
-              showCopyButton: false,
+      CustomProfileListTile(
+        label: user.username,
+        icons: Icons.text_fields,
+        showCopyButton: false,
+      ),
+      const SizedBox(height: 20),
+      CustomProfileListTile(
+        label: user.email,
+        icons: Icons.email,
+        showCopyButton: true,
+      ),
+      const SizedBox(height: 20),
+      CustomProfileListTile(
+        label: user.phoneNumber,
+        icons: Icons.phone,
+        onTap: () => SystemHelper.makeCall(user.phoneNumber),
+      ),
+      if (user.isCompany == false) const SizedBox(height: 20),
+      if (user.isCompany == false)
+        CustomProfileListTile(
+          label: user.experience,
+          icons: Icons.timer,
+          showCopyButton: false,
+        ),
+      const SizedBox(height: 20),
+      CustomProfileListTile(
+        label: user.country,
+        icons: Icons.location_city,
+        showCopyButton: false,
+      ),
+      const SizedBox(height: 20),
+      CustomProfileListTile(
+        label: user.descrption,
+        icons: Icons.description,
+        showCopyButton: false,
+      ),
+      const SizedBox(height: 20),
+      CustomProfileListTile(
+        label: user.selectedjobs,
+        icons: Icons.work,
+        showCopyButton: false,
+      ),
+
+      // Displaying selected languages
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+            child: Text(
+              'Programing Languages:',
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
-          const SizedBox(height: 20),
-          CustomProfileListTile(
-            label: user.country,
-            icons: Icons.location_city,
-            showCopyButton: false,
           ),
-          const SizedBox(height: 20),
-          CustomProfileListTile(
-            label: user.descrption,
-            icons: Icons.description,
-            showCopyButton: false,
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: isnotuser
+                ? company!.selectedLanguage.length
+                : selectedLanguages.length,
+            itemBuilder: (context, index) {
+              return CustomProfileListTile(
+                label: isnotuser
+                    ? company!.selectedLanguage[index]
+                    : selectedLanguages[index],
+                icons: Icons.language,
+                showCopyButton: false,
+                // Add other properties or actions if needed
+              );
+            },
           ),
-          const SizedBox(height: 20),
-          CustomProfileListTile(
-            label: user.selectedjobs,
-            icons: Icons.work,
-            showCopyButton: false,
+          const SizedBox(
+            height: 17,
           ),
+          CustomButton(
+            label: "Edit Information",
+            icons: Icons.edit,
+            onPressed: () async {
+              await Get.toNamed(Routes.EDIT_INFO);
+              // This code executes after the user navigates back from the editing page
+              // You can add logic here to refresh the user profile page
 
-          // Displaying selected languages
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                child: Text(
-                  'Programing Languages:',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: isnotuser
-                    ? company!.selectedLanguage.length
-                    : selectedLanguages.length,
-                itemBuilder: (context, index) {
-                  return CustomProfileListTile(
-                    label: isnotuser
-                        ? company!.selectedLanguage[index]
-                        : selectedLanguages[index],
-                    icons: Icons.language,
-                    showCopyButton: false,
-                    // Add other properties or actions if needed
-                  );
-                },
-              ),
-              const SizedBox(
-                height: 17,
-              ),
-              CustomButton(
-                label: "Edit Information",
-                icons: Icons.edit,
-                onPressed: () async {
-                  await Get.toNamed(Routes.EDIT_INFO);
-                  // This code executes after the user navigates back from the editing page
-                  // You can add logic here to refresh the user profile page
-
-                  _userProfileController.update();
-                  // Call the refresh function after returning from the editing page
-                },
-              ),
-              const SizedBox(
-                height: 17,
-              ),
-              // Other CustomProfileListTile widgets...
-              const Divider(
-                  color: Color.fromRGBO(0, 0, 0, 1), height: 12, thickness: 2),
+              _userProfileController.update();
+              // Call the refresh function after returning from the editing page
+            },
+          ),
+          const SizedBox(
+            height: 17,
+          ),
+          // Other CustomProfileListTile widgets...
+          const Divider(
+              color: Color.fromRGBO(0, 0, 0, 1), height: 12, thickness: 2),
           if (user.isCompany == true) ...[
             Text(
-              "Posts  ",
+              "Your Posts  ",
               textAlign: TextAlign.center,
               style: AppStyles.headLine1.copyWith(
                 color: Get.theme.colorScheme.onBackground,
               ),
             ),
             const Divider(color: Colors.black, height: 12, thickness: 2),
-            const Divider(
-              color: Colors.black,
-              height: 12,
-              thickness: 2,
-            ),
-            const Text(
-              "Posts that the company published",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const Divider(
-              color: Colors.black,
-              height: 12,
-              thickness: 2,
-            ),
             FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
               future: FirebaseFirestore.instance
                   .collection('Jobs')
-                  .where('companyId', isEqualTo: company!.uid)
+                  .where('companyId', isEqualTo: user.uid)
                   .get(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
@@ -316,8 +301,7 @@ class UserProfileBody extends StatelessWidget {
 
   void _deleteJob(String jobId) async {
     try {
-      String jobuid = 'your_job_uid'; // Replace 'your_job_uid' with the actual job UID
-      await FirebaseFirestore.instance.collection('Jobs').doc(jobuid).delete();
+      await FirebaseFirestore.instance.collection('Jobs').doc(jobId).delete();
       // Refresh the UI or perform any necessary updates
     } catch (e) {
       print('Error deleting job: $e');

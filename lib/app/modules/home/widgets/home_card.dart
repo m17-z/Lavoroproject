@@ -16,13 +16,10 @@ import 'package:lavoro/app/modules/user_profile/view/user_profile_view.dart';
 class MyCardView extends StatefulWidget {
   CreateJobAcount job;
   CompanyModel company;
-UserAccount users;
-  MyCardView({
-    Key? key,
-    required this.job,
-    required this.company,
-    required this.users
-  }) : super(key: key);
+  UserAccount users;
+  MyCardView(
+      {Key? key, required this.job, required this.company, required this.users})
+      : super(key: key);
 
   @override
   _MyCardView createState() => _MyCardView();
@@ -42,137 +39,131 @@ class _MyCardView extends State<MyCardView> {
     List<String> list2 = widget.job.selectedLanguage;
     List<String> list3 = widget.company.selectedLanguage;
     bool languagesMatch = list1.any((language) => list2.contains(language));
-    bool jobsMatch = widget.users.selectedjobs.contains(widget.job.selectedjobs);
-    bool languagesMatchcompany = list3.any((language) => list2.contains(language));
-     bool compMatch = widget.company.selectedjobs.contains(widget.job.selectedjobs);
-     bool usermatch =widget.users.email.contains(widget.company.email)==false;
-    
+    bool jobsMatch =
+        widget.users.selectedjobs.contains(widget.job.selectedjobs);
+    bool languagesMatchcompany =
+        list3.any((language) => list2.contains(language));
+    bool compMatch =
+        widget.company.selectedjobs.contains(widget.job.selectedjobs);
+    bool usermatch = widget.users.email.contains(widget.company.email) == false;
+
     setState(() {
-      isDataAvailable = (usermatch&&(languagesMatch || jobsMatch  ||languagesMatchcompany||compMatch));
+      isDataAvailable = (usermatch &&
+          (languagesMatch || jobsMatch || languagesMatchcompany || compMatch));
     });
   }
+
   Widget build(BuildContext context) {
     if (isDataAvailable) {
-    return Card(
-      borderOnForeground: true,
-      elevation: 100,
-      margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Get.to(CompanyProfileView(
-                      company: widget.company,
-                      isnotuser: true,
-                    ));
-                  },
-                  child: CircleAvatar(
-                    radius: 30,
-                    backgroundImage: NetworkImage(widget.company.imageUrl),
+      return Card(
+        borderOnForeground: true,
+        elevation: 100,
+        margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(CompanyProfileView(
+                        company: widget.company,
+                        isnotuser: true,
+                      ));
+                    },
+                    child: CircleAvatar(
+                      radius: 30,
+                      backgroundImage: NetworkImage(widget.company.imageUrl),
+                    ),
                   ),
-                ),
-                SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        ' ${widget.company.username}',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                  SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          ' ${widget.company.username}',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      Text(
-                        ' ${widget.company.isCompany}',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                        Text(
+                          ' ${widget.company.isCompany}',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      Divider(
-            height: 0,
-            thickness: 1,
-            color: Colors.black,
-          ),
-                      Text(
-                        ' ${widget.job.title}',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                        Divider(
+                          height: 0,
+                          thickness: 1,
+                          color: Colors.black,
                         ),
-                        
-                      ),
-                         Divider(
-            height: 0,
-            thickness: 1,
-            color: Colors.black,
-          ),
-                           SizedBox(height: 4),
-                      Text(
-                        ': ${widget.job.selectedjobs}',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                        Text(
+                          ' ${widget.job.title}',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                        
-                      ),
-                      SizedBox(height: 4),
-                       Divider(
-            height: 0,
-            thickness: 1,
-          ),
-                      Text(
-                        'programing languges that job need : ${widget.job.selectedLanguage}',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                        Divider(
+                          height: 0,
+                          thickness: 1,
+                          color: Colors.black,
                         ),
-                        
-                      ),
-                      
-                      SizedBox(height: 4),
-                    ],
+                        SizedBox(height: 4),
+                        Text(
+                          ': ${widget.job.selectedjobs}',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                        Divider(
+                          height: 0,
+                          thickness: 1,
+                        ),
+                        Text(
+                          'programing languges that job need : ${widget.job.selectedLanguage}',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-         Divider(
-            height: 0,
-            thickness: 1,
-            color: Colors.black,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              '${widget.job.jobdescription}',
-              style: TextStyle(fontSize: 16),
-              
+            Divider(
+              height: 0,
+              thickness: 1,
+              color: Colors.black,
             ),
-            
-          ),
-          Divider(
-            height: 0,
-            thickness: 2,
-            color: Colors.black,
-            
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                '${widget.job.jobdescription}',
+                style: TextStyle(fontSize: 16),
+              ),
+            ),
+            Divider(
+              height: 0,
+              thickness: 2,
+              color: Colors.black,
+            ),
+          ],
+        ),
+      );
+    }
 
-          ),
-        ],
-      ),
-    );
-    
-  }
-
-      return SizedBox();
-    
+    return SizedBox();
   }
 }
-
